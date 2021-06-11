@@ -741,7 +741,7 @@
                 }(), Ge()
         },
         38: function(e) {
-            e.exports = JSON.parse('{"b":"抖音超火的便携小空调","a":{"url":"https://www.baidu.com/","email":"admin@aloud.cn","name":"便携小空调"},"c":{"type":"git","url":"https://www.baidu.com/"}}')
+            e.exports = JSON.parse('{"b":"咸鱼的便携小空调","a":{"url":"https://www.baidu.com/","email":"admin@aloud.cn","name":"便携小空调"},"c":{"type":"git","url":"https://www.baidu.com/"}}')
         }
     },
     [
