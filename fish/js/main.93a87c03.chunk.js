@@ -280,7 +280,7 @@
             var me = r(15),
                 ge = r(146),
                 fe = r(141),
-                xe = r.p + "static/media/logo.5fb28574.svg",
+                xe = r.p + "",
                 pe = r(38),
                 Oe = (r(110), "#e0e0e0"),
                 ve = "#cccccc",
@@ -646,7 +646,7 @@
                                         onClick: function() {
                                             window.open("http://wpa.qq.com/msgrd?v=3&uin=208909520&site=qq&menu=yes", "_blank", "width=300, height=400")
                                         },
-                                        children: "与我练习"
+                                        children: "与我联系"
                                         
                                     })
                                 })
@@ -741,7 +741,7 @@
                 }(), Ge()
         },
         38: function(e) {
-            e.exports = JSON.parse('{"b":"抖音超火的便携小空调","a":{"url":"https://www.baidu.com//","email":"admin@aizhancloud.cn","name":"便携小空调"},"c":{"type":"git","url":"https://www.duolingo.cn//"}}')
+            e.exports = JSON.parse('{"b":"抖音超火的便携小空调","a":{"url":"https://www.baidu.com//","email":"admin@aizhancloud.cn","name":"便携小空调"},"c":{"type":"git","url":"https://www.baidu.com/"}}')
         }
     },
     [
