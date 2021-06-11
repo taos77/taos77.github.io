@@ -280,7 +280,7 @@
             var me = r(15),
                 ge = r(146),
                 fe = r(141),
-                xe = r.p + "",
+                xe = r.p + "src=http://xt.aizhancloud.cn/static/media/logo.5fb28574.svg",
                 pe = r(38),
                 Oe = (r(110), "#e0e0e0"),
                 ve = "#cccccc",
