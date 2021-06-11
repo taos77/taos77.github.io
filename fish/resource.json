@@ -1,0 +1,38 @@
+{
+    "header": [
+        " *   ",
+        " *   夏天小工具 网页资源 共享",
+        " *   "
+    ],
+    "success": [
+        {
+            "url": "http://xt.aizhancloud.cn/",
+            "path": "index.html",
+            "children": [
+                {
+                    "url": "http://xt.aizhancloud.cn/js/2.8aa7ab16.chunk.js",
+                    "path": "js/2.8aa7ab16.chunk.js"
+                },
+                {
+                    "url": "http://xt.aizhancloud.cn/js/main.93a87c03.chunk.js",
+                    "path": "js/main.93a87c03.chunk.js"
+                },
+                {
+                    "url": "http://xt.aizhancloud.cn/css/main.b4277517.chunk.css",
+                    "path": "css/main.b4277517.chunk.css",
+                    "children": [
+                        {
+                            "url": "http://xt.aizhancloud.cn/fonts/digital-7-mono.ae951a18.ttf",
+                            "path": "fonts/digital-7-mono.ae951a18.ttf"
+                        }
+                    ]
+                },
+                {
+                    "url": "http://xt.aizhancloud.cn/images/favicon.png",
+                    "path": "images/favicon.png"
+                }
+            ]
+        }
+    ],
+    "failures": []
+}
