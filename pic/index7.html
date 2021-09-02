@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1, user-scalable=no" name="viewport">
+	<link type="text/css" rel="stylesheet" href="static/css/bootstrap.min1.css">
+	<link type="text/css" rel="stylesheet" href="static/css/original.css">
+	<link type="text/css" rel="stylesheet" href="static/css/original_sys0.css">
+	<link type="text/css" rel="stylesheet" href="static/css/oheader_menu0.css">
+	<script type="text/javascript" src="static/js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="static/js/bootstrap.min1.js"></script>
+	<script type="text/javascript" src="static/js/moment-with-locales.js"></script>
+	<script type="text/javascript" src="static/js/original.js"></script>
+<link rel="icon" href="https://seoi.net/assets/img/myservice/seoi_aa_16x16.png">
+<title>語呂合わせジェネレータ</title>
+	<link rel="icon" href="https://seoi.net/assets/img/myservice/goro_aa_16x16.png">	<style>
+	/*
+		#000000;	Aの最濃	bodyの字
+		#e0881b;	Aの濃	head、panel、th、btnの背景
+		#fae976;	Aの薄	bodyの背景
+		#ffffff;	Aの最薄	panel、tdの背景
+		#ffffff;		inputの背景のみ
+		#000000;		inputの字のみ
+		#ff0000;		エラーの字のみ
+		#ff6600;		アンカーの字のみ
+	*/
+	div.pagehead *,
+	div.pagemain * {
+		color: #000000;
+	}
+	div.pagemain a {
+		color: #ff6600;
+	}
+	
+	div.pagehead,
+	div.pagefoot {
+		background-color: #e0881b;
+		border-color: #000000;
+		color: #000000;
+	}
+	
+	div.pagehead,
+	div.pagehead a,
+	div.pagefoot,
+	div.pagefoot a {
+		color: #ffffff;
+		text-shadow: #000000 1px 1px 0px, #000000 -1px 1px 0px, #000000 1px -1px 0px, #000000 -1px -1px 0px;
+	}
+	
+	body {
+		background-color: #fae976;
+	}
+	
+	h2,
+	h3 {
+		border-color: #000000;
+	}
+	
+	a {
+		color: #ff6600;
+	}
+	
+	.panel-default > .panel-heading {
+		background-color: #e0881b;
+		border-color: #000000;
+		color: #ffffff;
+	}
+	
+	div.panel {
+		background-color: #ffffff;
+		border-color: #000000;
+	}
+	
+	.table-bordered {
+		border-color: #000000;
+	}
+	
+	.table > tbody > tr.active > td,
+	.table > tbody > tr.active > th,
+	.table > tbody > tr > td.active,
+	.table > tbody > tr > th.active,
+	.table > tfoot > tr.active > td,
+	.table > tfoot > tr.active > th,
+	.table > tfoot > tr > td.active,
+	.table > tfoot > tr > th.active,
+	.table > thead > tr.active > td,
+	.table > thead > tr.active > th,
+	.table > thead > tr > td.active,
+	.table > thead > tr > th.active {
+		background-color: #e0881b;
+		border-color: #000000;
+		color: #ffffff;
+	}
+	.table-bordered > tbody > tr > td,
+	.table-bordered > tbody > tr > th,
+	.table-bordered > tfoot > tr > td,
+	.table-bordered > tfoot > tr > th,
+	.table-bordered > thead > tr > td,
+	.table-bordered > thead > tr > th {
+		background-color: #ffffff;
+		border-color: #000000;
+	}
+	
+	.pagemain .form-control {
+		background-color: #ffffff;
+		border-color: #000000;
+		color: #000000;
+	}
+	
+	.pagemain option {
+		color: #000000;
+	}
+	
+	.pagemain .btn-default,
+	.pagemain .btn-primary,
+	.pagemain .btn-success,
+	.pagemain .btn-warning,
+	.pagemain .btn-danger,
+	.pagemain .btn-info {
+		background-color: #e0881b;
+		border-color: #000000;
+		color: #ffffff;
+	}
+	
+	.has-error .checkbox,
+	.has-error .checkbox-inline,
+	.has-error .control-label,
+	.has-error .help-block,
+	.has-error .radio,
+	.has-error .radio-inline,
+	.has-error.checkbox label,
+	.has-error.checkbox-inline label,
+	.has-error.radio label,
+	.has-error.radio-inline label {
+		color: #ff0000;
+	}
+	
+	h2,h3 { font-family: a013cdbc; }	
+		div.pagehead h1 {
+		font-size: 0;
+	}
+			div.pagehead,
+	div.pagefoot {
+		background-image: url(static/image/goro_aa_head.png);
+	}
+		</style>
+</head>
+<body id="h1title">
+<input class="syshide" name="txt_global_json" value="{&quot;base_url&quot;:&quot;https:\/\/seoi.net\/&quot;}" type="text" id="txt_global_json"><div id="nofooter">
+	<header>
+	<div class="navbar navbar-default" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="index1.html"><img src="static/picture/seoi_aa_nav.png" alt=""></a>			</div>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+															<li>
+																				<a href="javascript:;">
+								<span class="visible-sm"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> </span>
+								<span class="visible-xs visible-md visible-lg"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> サービス一覧 </span>
+							</a>
+																		</li>
+										<li>
+																				<a href="javascript:;">
+								<span class="visible-sm"><span class=" glyphicon glyphicon-tower" aria-hidden="true"></span> </span>
+								<span class="visible-xs visible-md visible-lg"><span class=" glyphicon glyphicon-tower" aria-hidden="true"></span> メディア掲載 </span>
+							</a>
+																		</li>
+										<li>
+																				<a href="javascript:;">
+								<span class="visible-sm"><span class=" glyphicon glyphicon-user" aria-hidden="true"></span> </span>
+								<span class="visible-xs visible-md visible-lg"><span class=" glyphicon glyphicon-user" aria-hidden="true"></span> 企業情報 </span>
+							</a>
+																		</li>
+										<li>
+																				<a href="javascript:;">
+								<span class="visible-sm"><span class=" glyphicon glyphicon-globe" aria-hidden="true"></span> </span>
+								<span class="visible-xs visible-md visible-lg"><span class=" glyphicon glyphicon-globe" aria-hidden="true"></span> 言語切替 </span>
+							</a>
+																		</li>
+										<li>
+																				<a href="javascript:;">
+								<span class="visible-sm"><span class=" glyphicon glyphicon-link" aria-hidden="true"></span> </span>
+								<span class="visible-xs visible-md visible-lg"><span class=" glyphicon glyphicon-link" aria-hidden="true"></span> リンク一覧 </span>
+							</a>
+																		</li>
+										<li>
+																								</li>
+										<li>
+																								</li>
+									</ul>
+				<ul class="nav navbar-nav navbar-right">
+																	</ul>
+								<div class="navbar-right">
+					<form action="https://seoi.net/page/my/service/" id="form_nav_search" class="navbar-form navbar-left" role="search" accept-charset="utf-8" method="post">						<div class="input-group">
+							<input class="form-control ime-active" name="txt_search_keyword" value="" type="text" id="txt_search_keyword">							<span class="input-group-btn">
+							<button class="btn btn-default" type="button" onclick="$('#form_nav_search').submit();"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+							</span>
+						</div>
+					</form>				</div>
+							</div>
+		</div>
+	</div>
+</header>
+<div class="modal fade" id="divLogout" tabindex="-1" role="dialog" aria-labelledby="divLogoutLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-body">
+				ログアウトしますか？			</div>
+			<div class="modal-footer">
+				<a class="btn btn-primary btn-sm" href="javascript:;">はい</a>				<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">いいえ</button>
+			</div>
+		</div>
+	</div>
+</div>
+	<div class="pagemain container">
+		<script>
+	var global;
+	var local;
+	
+	$(function() {
+		global = $.parseJSON($('#txt_global_json').val());
+		local = $.parseJSON($('#txt_local_json').val());
+		
+		$('#btn_search').click(function() {
+			var url = local['url_list'];
+			url += encodeURIComponent($('#txt_search_param0').val());
+			location.href = url;
+			return false;
+		});
+	});
+</script>
+<style>
+td.strrank {
+	font-size: 150%;
+}
+tr.strsuji td {
+	padding: 0 5px;
+	text-align: center;
+	color: silver;
+}
+tr.strword td {
+	padding: 0 5px;
+	text-align: center;
+	font-size: 150%;
+}
+tr.strkana td {
+	padding: 0 5px;
+	text-align: center;
+	color: silver;
+}
+.ranking {
+	visibility: hidden;
+	opacity: 0;
+}
+h2 {
+	font-size: 200%;
+	letter-spacing: 5px;
+}
+</style>
+<script type="text/javascript">
+$(function(){
+	$($('.ranking').get().reverse()).each(function(i) {
+		// 遅延させてフェードイン
+//		$(this).delay(100 * i).fadeIn(1000);
+		$(this).delay(200 * i).css({'visibility' : 'visible'}).animate({'opacity' : 1},200);
+	});
+});
+</script>
+
+</div>
+<div class="pagehead">
+		<h1><a href=""><img alt="語呂合わせジェネレータ" title="語呂合わせジェネレータ" src="static/picture/goro_ja_320x50.png"></a></h1>
+	</div>
+<div class="pagemain container">
+
+<form action="https://seoi.net/goro/" id="form_search" class="form-horizontal" accept-charset="utf-8" method="post">	<p>
+	このジェネレータを使えば、数字の語呂合わせを生成することができます。<br>
+	恋人の誕生日、会員番号、郵便番号など、憶えたい数字が憶えやすくなるでしょう。<br>
+	
+	数字を入力して下さい。（例）1192<br>
+	</p>
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<div class="form-group">
+					<label class="col-lg-5 col-sm-4 control-label" for="txt_search_param0">数字：</label>					<div class="col-lg-2 col-sm-4"><input class="form-control ime-inactive hankaku" name="txt_search_param0" value="" type="text" id="txt_search_param0"></div>
+					<div class="col-lg-5 col-sm-4"></div>
+			</div>
+<!--
+			<div class="form-group">
+					<label class="col-lg-5 col-sm-4 control-label" for="txt_search_param1">数字2：</label>					<div class="col-lg-2 col-sm-4"><input class="form-control ime-inactive hankaku" name="txt_search_param1" value="" type="text" id="txt_search_param1" /></div>
+					<div class="col-lg-5 col-sm-4"></div>
+			</div>
+-->
+						<div class="text-center">
+				<input class="btn btn-info" name="btn_search" value="表示" type="submit" id="btn_search">				<a class="btn btn-default" href="">リセット</a>			</div>
+		</div>
+	</div>
+</form><input class="syshide" size="1" name="txt_local_json" value="{&quot;url_list&quot;:&quot;\/goro\/&quot;}" type="text" id="txt_local_json"><p>
+周囲に人がいて番号入力に抵抗がある場合は、番号を分割して入力するなどして下さい。<br>
+<a href="javascript:;">語呂合わせデータ</a><br>
+
+<!-- SP Generatorページレクタングル -->
+<div id="im-15752b4f880c4a20878d6dcb4e624881">
+  <script async="" src="static/js/spot.js"></script>
+  <script>(window.adsbyimobile=window.adsbyimobile||[]).push({pid:75902,mid:536452,asid:1752514,type:"banner",display:"inline",elementid:"im-15752b4f880c4a20878d6dcb4e624881"})</script>
+</div>
+<!-- SP Generatorページレクタングル -->
+
+
+		<div class="panel panel-default mymedia">
+	<div class="panel-heading">メディア掲載</div>
+	<div class="panel-body">
+		<table class="table">
+			<tbody>
+								<tr>
+										<td nowrap="" class="col1px"></td>
+					<td>語呂合わせジェネレータが公式ブロガーのカータン様のブログで紹介されました。 <a target="_blank" href="javascript:;">URL</a></td>
+				</tr>
+								<tr>
+										<td nowrap="" class="col1px"></td>
+					<td>語呂合わせジェネレータが「コブスニュース」で紹介されました。</td>
+				</tr>
+								<tr>
+										<td nowrap="" class="col1px"></td>
+					<td>語呂合わせジェネレータが「教えて君.net」で紹介されました。</td>
+				</tr>
+								<tr>
+										<td nowrap="" class="col1px"></td>
+					<td>語呂合わせジェネレータが「Ameba News」で紹介されました。 <a target="_blank" href="javascript:;">URL</a></td>
+				</tr>
+								<tr>
+										<td nowrap="" class="col1px"></td>
+					<td>語呂合わせジェネレータが「exciteニュース」で紹介されました。 <a target="_blank" href="javascript:;">URL</a></td>
+				</tr>
+								<tr>
+										<td nowrap="" class="col1px"></td>
+					<td>語呂合わせジェネレータが「gooニュース」で紹介されました。 <a target="_blank" href="javascript:;">URL</a></td>
+				</tr>
+								<tr>
+										<td nowrap="" class="col1px"></td>
+					<td>語呂合わせジェネレータが「Infoseekニュース」で紹介されました。 <a target="_blank" href="javascript:;">URL</a></td>
+				</tr>
+								<tr>
+										<td nowrap="" class="col1px"></td>
+					<td>語呂合わせジェネレータが「livedoorニュース」で紹介されました。</td>
+				</tr>
+								<tr>
+										<td nowrap="" class="col1px"></td>
+					<td>語呂合わせジェネレータが「mixiニュース」で紹介されました。</td>
+				</tr>
+								<tr>
+										<td nowrap="" class="col1px"></td>
+					<td>語呂合わせジェネレータが「msnエンタメ」で紹介されました。</td>
+				</tr>
+								<tr>
+										<td nowrap="" class="col1px"></td>
+					<td><strong>語呂合わせジェネレータが「Yahoo!ネタりか」で紹介されました。</strong></td>
+				</tr>
+								<tr>
+										<td nowrap="" class="col1px"></td>
+					<td>語呂合わせジェネレータが「ニコニコニュース」で紹介されました。 <a target="_blank" href="javascript:;">URL</a></td>
+				</tr>
+								<tr>
+										<td nowrap="" class="col1px"></td>
+					<td>語呂合わせジェネレータが「ハリウッドチャンネル」で紹介されました。</td>
+				</tr>
+								<tr>
+										<td nowrap="" class="col1px"></td>
+					<td><strong>語呂合わせジェネレータが「The Japan Times Online」で紹介されました。</strong> <a target="_blank" href="javascript:;">URL</a></td>
+				</tr>
+								<tr>
+										<td nowrap="" class="col1px"></td>
+					<td><strong>語呂合わせジェネレータが「Yahoo!ニュース」で紹介されました。</strong></td>
+				</tr>
+							</tbody>
+		</table>
+	</div>
+</div>
+	</div>
+</div>
+<footer>
+	<div id="footer">
+		<div class="pagefoot">
+			<div class="container">
+				Copyright &copy; 2018 rarapima All Rights Reserved.			</div>
+		</div>
+	</div>
+</footer>
+<!-- SP 下部固定オーバーレイ -->
+<div style="position:fixed;bottom:0;left:0;right:0;margin:auto;width:100%;z-index:99999;">
+<div id="im-d92928793f894289abea1517a8b4ff99">
+  <script async="" src="static/js/spot.js"></script>
+  <script>(window.adsbyimobile=window.adsbyimobile||[]).push({pid:75902,mid:536452,asid:1752513,type:"banner",display:"inline",elementid:"im-d92928793f894289abea1517a8b4ff99"})</script>
+</div>
+</div>
+<!-- SP 下部固定オーバーレイ -->
+
+<!-- SP インターステシャル -->
+<div id="im-e2e6f68abef74aa0ac2ae143d0f84280">
+  <script async="" src="static/js/spot.js"></script>
+  <script>(window.adsbyimobile=window.adsbyimobile||[]).push({pid:75902,mid:536452,asid:1752517,type:"banner",display:"interstitial",elementid:"im-e2e6f68abef74aa0ac2ae143d0f84280"})</script>
+</div>
+<!-- SP インターステシャル -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="static/js/js.js"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-9143445-2');
+</script>
+</body>
+</html>

@@ -1,0 +1,362 @@
+/* --- ■■■■■■■■■■ --- */
+/* ---  共通  --- */
+* {
+	font-family: monospace;
+}
+
+/* --- ■■■■■■■■■■ --- */
+/* --- タグ --- */
+
+body {
+	font-size: 14px;	/* 9pt; */
+	line-height: 1.8em;
+}
+
+h1 {
+	padding: 10px 20px 20px 0;
+	font-size: 18px;	/* 14pt; */
+}
+
+h2 {
+	padding: 10px 20px 20px 0;
+	font-size: 18px;	/* 14pt; */
+}
+
+h3 {
+	padding: 10px 20px 20px 20px;
+	font-size: 15px;	/* 12pt; */
+}
+
+h1,h2,h3 {
+	margin: 0;
+}
+
+th {
+	font-weight: normal;
+}
+
+label {
+	font-weight: normal;
+}
+
+p {
+	margin: 0 0 20px;
+}
+
+/* --- ■■■■■■■■■■ --- */
+/* --- bootstrap --- */
+
+.badge {
+	margin-left: 5px;
+}
+
+.panel {
+//	margin-top: 10px;
+//	margin-bottom: 10px;
+}
+
+.btn {
+	border-style: solid;
+	border-width: 1px;
+}
+
+.input-group .btn {
+	border-width: 1px;
+}
+
+div.text-center .btn {
+//	padding-left: 3em;
+//	padding-right: 3em;
+	min-width: 8em;
+}
+
+.table > caption + thead > tr:first-child > td, .table > caption + thead > tr:first-child > th, .table > colgroup + thead > tr:first-child > td, .table > colgroup + thead > tr:first-child > th, .table > thead:first-child > tr:first-child > td, .table > thead:first-child > tr:first-child > th {
+	border-bottom: 0;
+}
+
+/* ---  ファイルアップロード欄は高さを固定すると「ファイルを選択」ボタンが切れそうになるためautoに変更 --- */
+input[type=file].form-control {
+	height: auto;
+}
+
+/* ---  一覧ヘッダのボタン位置で使用 --- */
+.table > thead > tr > th.text-bottom {
+	vertical-align: bottom;
+}
+
+/* ---  一覧内のform-control-staticは余白を無くす --- */
+.table .form-control-static {
+	min-height: 0;
+	padding-top: 0;
+	padding-bottom: 0;
+	margin-bottom: 0;
+}
+
+.media {
+	padding: 10px 0;
+	height: 9em;
+}
+
+.media-left p {
+	margin: 0;
+	padding: 5px;
+	width: 100px;
+	height: 100px;
+	text-align: center;
+	border-style: solid;
+	border-width: 5px;
+}
+
+/* --- ■■■■■■■■■■ --- */
+/* --- ヘッダとフッタ --- */
+div.pagehead h1 {
+	padding: 0;
+	margin: 0;
+	font-size: 24px;	/* 18pt; */
+	line-height: 50px;
+}
+
+div.pagehead h1 a {
+	padding: 0;
+	margin: 0;
+	text-decoration: none;
+}
+
+div.pagehead h1 a img {
+	padding: 0;
+	margin: 0;
+}
+
+div.pagehead,
+div.pagefoot
+{
+	padding: 0;
+	margin: 0;
+	border-style: solid;
+	border-width: 0;
+	text-align: left;
+	background-repeat: repeat;
+	background-position: center center;
+}
+
+div.pagehead {
+	margin: 0 0 20px 0;
+}
+
+div.pagehead,
+div.pagehead a,
+div.pagefoot,
+div.pagefoot a
+{
+	line-height: 50px;
+}
+
+/* --- ■■■■■■■■■■ --- */
+/* --- オリジナル定義クラス --- */
+
+/* --- メディア掲載 --- */
+div.mymedia .table > tbody > tr > td,
+div.mymedia .table > tbody > tr > th,
+div.mymedia .table > tfoot > tr > td,
+div.mymedia .table > tfoot > tr > th,
+div.mymedia .table > thead > tr > td,
+div.mymedia .table > thead > tr > th {
+	border-top-style: none;
+}
+div.mymedia .table {
+	margin-bottom: 0;
+}
+
+/* ---  非表示領域（開発時は表示させることがあるためCSSのクラスにしておく） --- */
+.syshide {
+	display: none;
+}
+
+/* ---  縦書き（縦書きにするスタイルも存在するが文字が横向きになったりするため適用しない） --- */
+.tategaki {
+	width: 1px;
+}
+
+/* ---  最小幅でnowrapを使いたい時などに使用する --- */
+.col1px {
+	width: 1%;
+}
+
+/* ---  ツールチップ用クエスチョンマーク --- */
+.question {
+	text-decoration: underline;
+	color: #8888ff;
+}
+
+/* ---  Ajax処理を行うセルをロックするために必要 --- */
+td.ajaxcell {
+	position: relative
+}
+
+/* ---  一覧表内の画像を縦横比を保ったまま一定サイズ内におさめる --- */
+.listimg {
+	display: table-cell; /*上下中央*/
+	width: 32px;
+	height: 20px;
+	text-align: center; /*左右中央*/
+	vertical-align: middle; /*上下中央*/
+}
+.listimg img {
+	width: auto;
+	height: auto;
+	max-width: 32px;
+	max-height: 20px;
+}
+
+/* ---  一覧内のボタンサイズ --- */
+.table .pagemain .btn-sm {
+	min-width: auto;
+	padding: 2px 10px;
+}
+
+/* ---  Ajax処理の待ち時間に表示 --- */
+span.ajaxwait {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 999;
+	
+	text-align: center;
+	padding: 13px;
+	
+	background-color: rgba(0,0,0,0.5);
+	color: #ffffff;
+	
+	cursor: wait;
+}
+
+/* ---  Ajax処理のfail時に表示 --- */
+span.ajaxerror {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 999;
+	
+	text-align: center;
+	padding: 13px;
+	
+	background-color: rgba(127,0,0,0.5);
+	color: #ffffff;
+}
+
+/* ---  Ajax処理のsuccess時かつ仕様的に値が更新できなかった時に表示 --- */
+span.ajaxwarning {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 999;
+	
+	padding: 0 0 0 2px;
+	font-size: 10px;	/* 8pt; */
+	
+	color: #ff0000;
+	
+	cursor: pointer;
+}
+
+/* ---  Ajax処理のsuccess時かつ値が更新できた時に表示 --- */
+span.ajaxsuccess {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 999;
+	
+	padding: 0 0 0 2px;
+	font-size: 10px;	/* 8pt; */
+	
+	color: #008800;
+	
+	cursor: pointer;
+}
+
+/* ---  IME --- */
+.ime-active {
+	ime-mode: active;
+}
+
+.ime-inactive {
+	ime-mode: inactive;
+}
+
+/* --- ■■■■■■■■■■ --- */
+/* --- あああああああ --- */
+span.label {
+	font-size: 100%;
+	font-weight: normal;
+}
+
+.breadcrumb {
+	padding: 0;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	background-color: transparent;
+}
+
+/* ---  bootstrap-selectのフォントサイズを調整 --- */
+.filter-option {
+	font-size: 15px;	/* 12pt; */
+}
+
+/* --- フッタ位置調整  --- */
+html,
+body {
+	height: 100%;
+}
+
+#nofooter {
+	min-height: 100%;
+	height: auto;
+	margin: 0 auto -50px;
+	padding: 0 0 100px;
+}
+
+#footer {
+	padding-top: 0;
+}
+
+#footer p {
+	margin-bottom :0;
+	padding-bottom :0;
+	height: 100px;
+}
+
+/* --- Table --- */
+.table {
+	margin-bottom: 0;
+}
+
+.table-nothead > tbody > tr:first-child > td {
+	border-top: 0px;
+}
+
+/* ---  Other --- */
+.oneline {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.tagtile a,
+.tagtile a:focus,
+.tagtile a:hover {
+	border: solid 1px silver;
+	line-height: 30px;
+	padding: 2px 8px;
+	white-space: nowrap;
+	border-radius: 4px;
+	text-decoration: none;
+}
+
+.tail {
+	padding: 20px 0;
+}
+

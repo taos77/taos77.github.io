@@ -1,0 +1,158 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<meta http-equiv="Content-Style-Type" content="text/css">
+	<meta http-equiv="Content-Script-Type" content="text/javascript">
+	<meta http-equiv="imagetoolbar" content="no">
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+	<meta name="robots" content="ALL">
+	<meta name="author" content="genzu.net">
+<meta name="keywords" content="略語復元ジェネレータ,ryaku,略語,復元">
+<meta name="description" content="略語を元の文章に復元するシステム。">
+	<meta name="viewport" content="width=device-width, initial-scale=1">  
+	<link rel="stylesheet" href="http://genzunet.appspot.com/common/appBase.css?2012021800" type="text/css">
+<link rel="stylesheet" href="static/css/20120822.css" type="text/css">
+	<!--[if IE]>
+	<script type="text/javascript" src="/games/excanvas.js"></script>
+	<![endif]-->
+	<script type="text/javascript" src="static/js/ecl.js"></script>
+	<script type="text/javascript" src="static/js/ajax.js"></script>
+<script type="text/javascript" src="static/js/20120822.js"></script>
+<style>
+.ct * {
+	margin: 0 auto;
+}
+#ryaku_alert,#ryaku_wait {
+	text-align: center;
+}
+p,ul {
+	padding: 0px 20px;
+}
+</style>
+<title>略語復元ジェネレータ</title>
+</head>
+<body>
+<!-- SP 下部固定オーバーレイ -->
+<div style="position:fixed;bottom:0;left:0;right:0;margin:auto;width:100%;z-index:99999;">
+<div id="im-d92928793f894289abea1517a8b4ff99">
+  <script async="" src="static/js/spot.js"></script>
+  <script>(window.adsbyimobile=window.adsbyimobile||[]).push({pid:75902,mid:536452,asid:1752513,type:"banner",display:"inline",elementid:"im-d92928793f894289abea1517a8b4ff99"})</script>
+</div>
+</div>
+<!-- SP 下部固定オーバーレイ -->
+
+<!-- SP インターステシャル -->
+<div id="im-e2e6f68abef74aa0ac2ae143d0f84280">
+  <script async="" src="static/js/spot.js"></script>
+  <script>(window.adsbyimobile=window.adsbyimobile||[]).push({pid:75902,mid:536452,asid:1752517,type:"banner",display:"interstitial",elementid:"im-e2e6f68abef74aa0ac2ae143d0f84280"})</script>
+</div>
+<!-- SP インターステシャル -->
+	<div class="genhome">
+	<a href="index1.html">メニュー</a><br>
+	</div>
+	<div class="back">
+	<div id="d1ws" class="d1">
+		<a id="jumphead" name="jumphead"></a>
+		<div class="head">
+		<div style="background-image: url(http://genzunet.appspot.com/ryaku/logo_ja_320x50.png);"></div>
+		</div>
+		<div class="main2">
+			<span id="sphd"><br></span>
+			<div id="dall">
+				<div id="inok">
+<h1>略語復元ジェネレータ</h1>
+					<p class="basedesc">
+このジェネレータでは略語を入力することで略す前の言葉を予想することができます。<br>
+					</p>
+					<div id="gen_desc">
+					<ul>
+<li>英字かカナを入力して下さい。（例）ISO</li>
+<li>人名を調べることもできます。（例）あいこ</li>
+					</ul>
+					</div>
+					<div class="ct">
+<div id="ryaku_wait">
+Now loading ...<br>
+</div>
+<div id="ryaku_all" style="display:none;">
+<table class="no">
+<tr>
+<td><input id="ryaku_req" name="ryaku_req" type="text" class="text" value="" maxlength="6" size="16" onfocus="fnFocus_anoryaku(this);" onblur="fnBlur_anoryaku(this);"></td>
+<td><input id="ryaku_send" name="ryaku_send" type="button" value="Enter" onclick="fnSend_anoryaku();" onfocus="fnFocus_anoryaku(this);" onblur="fnBlur_anoryaku(this);"></td>
+</tr>
+</table>
+<div id="ryaku_alert">
+</div>
+<div id="ryaku_pn">
+</div>
+</div>
+<input id="ryaku_res" type="hidden" value="~~RFG,略語復元ジェネレータ@Ryakugo Fukugen Generator">
+<input id="ryaku_mode" type="hidden" value="">
+<script type="text/javascript">
+<!--
+function fnGet_anoryaku(strGet,strElm){
+	fnGetRemoteScript('/cgi-bin/games/anoryaku.cgi',strGet + '&data=data_ja_ryaku&view=view_ja_ryaku&code=euc',strElm,0);
+	return false;
+}
+function fnGetValue_anoryaku(strGet,strElm){
+	fnGetRemoteScript('/cgi-bin/games/anoryaku.cgi',strGet + '&data=data_ja_ryaku&view=view_ja_ryaku&code=euc',strElm,1);
+	return false;
+}
+// -->
+</script>
+
+
+
+					</div>
+<br>
+<!-- SP Generatorページレクタングル -->
+<div id="im-15752b4f880c4a20878d6dcb4e624881">
+  <script async="" src="static/js/spot.js"></script>
+  <script>(window.adsbyimobile=window.adsbyimobile||[]).push({pid:75902,mid:536452,asid:1752514,type:"banner",display:"inline",elementid:"im-15752b4f880c4a20878d6dcb4e624881"})</script>
+</div>
+<!-- SP Generatorページレクタングル -->
+					<div id="gnft">
+						<ul>
+<li><a href="javascript:;" target="_blank">https://twitter.com/inkeinet/</a></li>
+						<li>ご自由にリンクして頂いて構いません。</li>
+						<li>番組や雑誌などでのご紹介は、管理人に無許可でご自由に紹介して頂いて構いません。</li>
+						<li>画面のスクリーンショットなどは、ブログなどにご自由に載せて頂いて構いません。</li>
+						<li>トラブルに関する一切の責任は負いません。</li>
+						</ul>
+					</div>
+				</div>
+<br>
+			</div>
+		</div>
+		<div class="foot" style="margin-top: 0px; padding: 15px;">
+			<a href="javascript:;">&copy; 2000 Rarapima</a><br>
+		</div>
+	</div>
+	</div>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-9143445-2");
+pageTracker._setDomainName(".seoi.net");
+pageTracker._initData();
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1&appId=116802541755127";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+</body>
+</html>
+<!--
+[ryaku][0.00176095962524414]
+
+-->

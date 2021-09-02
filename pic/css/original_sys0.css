@@ -1,0 +1,46 @@
+@import url(notosansjp.css);
+
+div.pagehead,
+div.pagehead a,
+div.pagefoot,
+div.pagefoot a,
+span.label,
+.btn {
+	font-family: 'Noto Sans JP';
+}
+
+body div.pagehead,
+body div.pagefoot
+{
+	border-width: 4px 0;
+	text-align: center;
+}
+
+#nofooter {
+	margin: 0 auto -58px;
+}
+
+body#h1title .navbar {
+	margin-bottom: 0;
+}
+
+.media-body p {
+	line-height: 1.5em;
+}
+
+.tail {
+	background-color: #ffffff;
+	color: #888888;
+}
+
+.tail a {
+	color: #444444;
+}
+
+.navbar-form {
+	padding-top: 0;
+	padding-bottom: 0;
+	border-top: 0 solid transparent;
+	border-bottom: 0 solid transparent;
+}
+

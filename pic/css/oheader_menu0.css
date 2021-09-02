@@ -1,0 +1,17 @@
+/* ---  Nav --- */
+.navbar {
+	border-radius: 0;
+}
+
+.navbar-default
+{
+	padding: 0;
+	border-width: 0;
+	background-repeat: repeat;
+	background-position: center center;
+}
+
+.navbar-brand {
+	padding: 0 15px;
+}
+
