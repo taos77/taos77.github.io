@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI & Crypto 资源库</title>
+    <style>
+        :root {
+            --bg-body: #0a0a0c;
+            --bg-card: #16161a;
+            --primary-gradient: linear-gradient(135deg, #a547ff 0%, #5e47ff 100%);
+            --text-main: #ffffff;
+            --text-muted: #8b8b92;
+            --border: #2d2d35;
+            --accent-purple: #a547ff;
+            --accent-orange: #ff9f47;
+            --accent-green: #47ffda;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .wrapper {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        header { margin-bottom: 40px; }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+
+        .subtitle { color: var(--text-muted); font-size: 14px; letter-spacing: 1px; }
+
+        .nav-tags {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+        }
+
+        .tag {
+            padding: 8px 20px;
+            background: #1c1c22;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-muted);
+        }
+
+        .tag:hover { border-color: var(--accent-purple); color: white; }
+
+        .tag.active {
+            background: var(--primary-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 15px rgba(165, 71, 255, 0.3);
+        }
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 140px;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-purple);
+            background: #1c1c24;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-title { font-size: 18px; font-weight: 700; margin-bottom: 10px; color: #efefef; }
+        .card-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; }
+
+        .badge { font-size: 11px; padding: 3px 8px; border-radius: 6px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border); }
+        .badge.btc { color: var(--accent-orange); border-color: rgba(255, 159, 71, 0.3); }
+        .badge.article { color: var(--accent-green); border-color: rgba(71, 255, 218, 0.3); }
+        .badge.tool { color: var(--accent-purple); border-color: rgba(165, 71, 255, 0.3); }
+
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <header>
+        <h1>AI & Crypto 资源板块</h1>
+        <div class="subtitle">DEEP SEEKER · STRATEGY · RESEARCH</div>
+    </header>
+
+    <div class="nav-tags" id="filter-nav">
+        <div class="tag active" data-type="all">全部资源</div>
+        <div class="tag" data-type="btc">BTC 指标</div>
+        <div class="tag" data-type="article">博主项目</div>
+        <div class="tag" data-type="tool">实用工具</div>
+        <div class="tag" data-type="eco">项目生态</div>
+    </div>
+
+    <div class="resource-grid" id="resource-container">
+        
+        <a href="https://www.strategy.com/" target="_blank" class="card" data-category="btc">
+            <div class="card-title">BTC的mNAV值↗</div>
+            <div class="card-desc">1以下悲观 1.5正常过热 2以上狂热 3以上泡沫跑路 </div>
+            <div class="card-footer"><span class="badge btc">BTC 指标</span></div>
+        </a>
+        <a href="https://glassnode.com/" target="_blank" class="card" data-category="btc">
+            <div class="card-title">暂时占位↗</div>
+            <div class="card-desc">顶级的链上数据分析平台，涵盖大户流向。</div>
+            <div class="card-footer"><span class="badge btc">BTC 指标</span></div>
+        </a>
+        <a href="https://www.coinglass.com/zh/LiquidationData" target="_blank" class="card" data-category="btc">
+            <div class="card-title">清算热力图 ↗</div>
+            <div class="card-desc">观察市场多空强弱及潜在的反转区域。</div>
+            <div class="card-footer"><span class="badge btc">BTC 指标</span></div>
+        </a>
+        <a href="https://alternative.me/crypto/fear-and-greed-index/" target="_blank" class="card" data-category="btc">
+            <div class="card-title">恐惧贪婪指数 ↗</div>
+            <div class="card-desc">基于社交情绪和波动的宏观情绪指标。</div>
+            <div class="card-footer"><span class="badge btc">BTC 指标</span></div>
+        </a>
+        <a href="https://cryptoquant.com/" target="_blank" class="card" data-category="btc">
+            <div class="card-title">CryptoQuant ↗</div>
+            <div class="card-desc">专注于交易所流入流出的实时链上情报。</div>
+            <div class="card-footer"><span class="badge btc">BTC 指标</span></div>
+        </a>
+        <a href="https://www.tradingview.com/" target="_blank" class="card" data-category="btc">
+            <div class="card-title">TradingView ↗</div>
+            <div class="card-desc">全球最强大的K线绘图与指标分析平台。</div>
+            <div class="card-footer"><span class="badge btc">BTC 指标</span></div>
+        </a>
+        <a href="https://www.blockchain.com/explorer" target="_blank" class="card" data-category="btc">
+            <div class="card-title">链上区块查询 ↗</div>
+            <div class="card-desc">查询最基础的交易记录与全节点状态。</div>
+            <div class="card-footer"><span class="badge btc">BTC 指标</span></div>
+        </a>
+        <a href="https://bitinfocharts.com/top-100-richest-bitcoin-addresses.html" target="_blank" class="card" data-category="btc">
+            <div class="card-title">巨鲸地址追踪 ↗</div>
+            <div class="card-desc">监控BTC前100位富有地址的增减仓情况。</div>
+            <div class="card-footer"><span class="badge btc">BTC 指标</span></div>
+        </a>
+        <a href="https://www.theblock.co/data/crypto-markets/prices" target="_blank" class="card" data-category="btc">
+            <div class="card-title">The Block Data ↗</div>
+            <div class="card-desc">提供深度的机构级加密市场统计数据。</div>
+            <div class="card-footer"><span class="badge btc">BTC 指标</span></div>
+        </a>
+
+        <a href="https://wsnb.online/" target="_blank" class="card" data-category="article">
+            <div class="card-title">魏神实盘 ↗</div>
+            <div class="card-desc">魏神实盘跟踪</div>
+            <div class="card-footer"><span class="badge article">博主项目</span></div>
+        </a>
+        <a href="https://orangeoracle.org/" target="_blank" class="card" data-category="article">
+            <div class="card-title">橘子实盘↗</div>
+            <div class="card-desc">实盘AI交易</div>
+            <div class="card-footer"><span class="badge article">博主项目</span></div>
+        </a>
+        <a href="https://michill.ai/" target="_blank" class="card" data-category="article">
+            <div class="card-title">michill妖币追踪↗</div>
+            <div class="card-desc">妖币跟踪</div>
+            <div class="card-footer"><span class="badge article">博主项目</span></div>
+        </a>
+        
+        <a href="https://www.yss-signal.com/" target="_blank" class="card" data-category="article">
+            <div class="card-title">余三水↗</div>
+            <div class="card-desc">呱呱选币</div>
+            <div class="card-footer"><span class="badge article">博主项目</span></div>
+        </a>
+        
+        <a href="https://wall-street-skill.com/" target="_blank" class="card" data-category="article">
+            <div class="card-title">华尔街课堂 ↗</div>
+            <div class="card-desc">街哥课堂</div>
+            <div class="card-footer"><span class="badge article">博主项目</span></div>
+        </a>
+        <a href="https://franklabs.cc/" target="_blank" class="card" data-category="article">
+            <div class="card-title">frank交易员排行↗</div>
+            <div class="card-desc">高手实盘排行</div>
+            <div class="card-footer"><span class="badge article">博主项目</span></div>
+        </a>
+        <a href="https://twitter.com/WuBlockchain" target="_blank" class="card" data-category="article">
+            <div class="card-title">暂时占位 ↗</div>
+            <div class="card-desc">关注硬核行业新闻与内幕消息的窗口。</div>
+            <div class="card-footer"><span class="badge article">博主项目</span></div>
+        </a>
+        <a href="https://v2ex.com/go/bitcoin" target="_blank" class="card" data-category="article">
+            <div class="card-title">V2EX 币区 ↗</div>
+            <div class="card-desc">技术人眼中的加密世界，视角独特。</div>
+            <div class="card-footer"><span class="badge article">博主项目</span></div>
+        </a>
+       
+        <a href="https://www.odaily.news/" target="_blank" class="card" data-category="article">
+            <div class="card-title">Odaily星球日报 ↗</div>
+            <div class="card-desc">快讯与深度专题结合的头部媒体。</div>
+            <div class="card-footer"><span class="badge article">博主项目</span></div>
+        </a>
+
+        <a href="https://venice.ai/chat" target="_blank" class="card" data-category="tool">
+            <div class="card-title">VVV币种问答↗</div>
+            <div class="card-desc">短线问答</div>
+            <div class="card-footer"><span class="badge tool">实用工具</span></div>
+        </a>
+        <a href="https://asksurf.ai/" target="_blank" class="card" data-category="tool">
+            <div class="card-title">surf↗</div>
+            <div class="card-desc">深度比较准</div>
+            <div class="card-footer"><span class="badge tool">实用工具</span></div>
+        </a>
+        <a href="https://arkhamintelligence.com/" target="_blank" class="card" data-category="tool">
+            <div class="card-title">占位 ↗</div>
+            <div class="card-desc">穿透地址身份，监控机构钱包动向。</div>
+            <div class="card-footer"><span class="badge tool">实用工具</span></div>
+        </a>
+        <a href="https://etherscan.io/" target="_blank" class="card" data-category="tool">
+            <div class="card-title">Etherscan ↗</div>
+            <div class="card-desc">以太坊浏览器，链上交互必备工具。</div>
+            <div class="card-footer"><span class="badge tool">实用工具</span></div>
+        </a>
+        <a href="https://www.tokenterminal.com/" target="_blank" class="card" data-category="tool">
+            <div class="card-title">Token Terminal ↗</div>
+            <div class="card-desc">从营收和利润视角评估协议价值。</div>
+            <div class="card-footer"><span class="badge tool">实用工具</span></div>
+        </a>
+        <a href="https://revoke.cash/" target="_blank" class="card" data-category="tool">
+            <div class="card-title">Revoke.cash ↗</div>
+            <div class="card-desc">取消授权工具，保护钱包安全的关键。</div>
+            <div class="card-footer"><span class="badge tool">实用工具</span></div>
+        </a>
+        <a href="https://app.dune.com/" target="_blank" class="card" data-category="tool">
+            <div class="card-title">Dune Analytics ↗</div>
+            <div class="card-desc">自定义SQL查询，可视化链上数据看板。</div>
+            <div class="card-footer"><span class="badge tool">实用工具</span></div>
+        </a>
+        <a href="https://coinmarketcap.com/" target="_blank" class="card" data-category="tool">
+            <div class="card-title">CoinMarketCap ↗</div>
+            <div class="card-desc">最全的代币市值排名与行情看板。</div>
+            <div class="card-footer"><span class="badge tool">实用工具</span></div>
+        </a>
+        <a href="https://www.gasnow.org/" target="_blank" class="card" data-category="tool">
+            <div class="card-title">GasNow ↗</div>
+            <div class="card-desc">监控实时Gas费，寻找最低成本交互时机。</div>
+            <div class="card-footer"><span class="badge tool">实用工具</span></div>
+        </a>
+
+        <a href="https://www.rootdata.com/" target="_blank" class="card" data-category="eco">
+            <div class="card-title">占位 ↗</div>
+            <div class="card-desc">Web3项目的视觉数据库，查融资必用。</div>
+            <div class="card-footer"><span class="badge">项目生态</span></div>
+        </a>
+        <a href="https://defillama.com/" target="_blank" class="card" data-category="eco">
+            <div class="card-title">DefiLlama ↗</div>
+            <div class="card-desc">监控各协议TVL，分析生态流动性之王。</div>
+            <div class="card-footer"><span class="badge">项目生态</span></div>
+        </a>
+        <a href="https://l2beat.com/" target="_blank" class="card" data-category="eco">
+            <div class="card-title">L2BEAT ↗</div>
+            <div class="card-desc">Layer 2 扩容方案的详细数据与安全性对比。</div>
+            <div class="card-footer"><span class="badge">项目生态</span></div>
+        </a>
+        <a href="https://www.alchemy.com/dapps" target="_blank" class="card" data-category="eco">
+            <div class="card-title">Alchemy Dapp Store ↗</div>
+            <div class="card-desc">寻找不同生态下最热门的Dapps应用。</div>
+            <div class="card-footer"><span class="badge">项目生态</span></div>
+        </a>
+        <a href="https://solscan.io/" target="_blank" class="card" data-category="eco">
+            <div class="card-title">Solscan ↗</div>
+            <div class="card-desc">Solana 生态浏览器，监控SOL大户动向。</div>
+            <div class="card-footer"><span class="badge">项目生态</span></div>
+        </a>
+        <a href="https://dappradar.com/" target="_blank" class="card" data-category="eco">
+            <div class="card-title">DappRadar ↗</div>
+            <div class="card-desc">分析Dapp活跃用户数与交易量的首选网站。</div>
+            <div class="card-footer"><span class="badge">项目生态</span></div>
+        </a>
+        <a href="https://www.web3.career/" target="_blank" class="card" data-category="eco">
+            <div class="card-title">Web3 Career ↗</div>
+            <div class="card-desc">关注行业动态的另一窗口：看人才去哪。</div>
+            <div class="card-footer"><span class="badge">项目生态</span></div>
+        </a>
+        <a href="https://crypto.com/price" target="_blank" class="card" data-category="eco">
+            <div class="card-title">Crypto.com 生态 ↗</div>
+            <div class="card-desc">全方位的中心化交易所与公链生态集成。</div>
+            <div class="card-footer"><span class="badge">项目生态</span></div>
+        </a>
+        <a href="https://www.binance.com/zh-CN/feed" target="_blank" class="card" data-category="eco">
+            <div class="card-title">Binance Feed ↗</div>
+            <div class="card-desc">币安广场，实时了解社区最火的项目话题。</div>
+            <div class="card-footer"><span class="badge">项目生态</span></div>
+        </a>
+
+    </div>
+</div>
+
+<script>
+    const nav = document.getElementById('filter-nav');
+    const cards = document.querySelectorAll('.card');
+
+    nav.addEventListener('click', (e) => {
+        const target = e.target;
+        if (target.classList.contains('tag')) {
+            document.querySelector('.tag.active').classList.remove('active');
+            target.classList.add('active');
+            const filterType = target.getAttribute('data-type');
+
+            cards.forEach(card => {
+                if (filterType === 'all' || card.getAttribute('data-category') === filterType) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    });
+</script>
+</body>
+</html>
