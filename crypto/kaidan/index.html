@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>交易核心逻辑指令集</title>
+    <style>
+        :root {
+            --bg: #f4f4f7;
+            --paper: #ffffff;
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --accent: #000000;
+            --rule-line: #dddddd;
+            --highlight: #fff9c4;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-primary);
+            font-family: "Inter", "Segoe UI", "PingFang SC", sans-serif;
+            line-height: 1.8;
+            margin: 0;
+            padding: 50px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: var(--paper);
+            padding: 80px 60px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border: 1px solid #e0e0e0;
+        }
+
+        /* 顶部标题：模拟公文 */
+        header {
+            border-bottom: 3px solid var(--accent);
+            padding-bottom: 20px;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 900;
+            margin: 0;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .doc-no {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 10px;
+            font-family: monospace;
+        }
+
+        /* 核心板块 */
+        .module {
+            margin-bottom: 45px;
+        }
+
+        h2 {
+            font-size: 18px;
+            background: var(--accent);
+            color: white;
+            display: inline-block;
+            padding: 2px 12px;
+            margin-bottom: 20px;
+            transform: skewX(-10deg);
+        }
+
+        .list-item {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            position: relative;
+            border-left: 2px solid var(--rule-line);
+        }
+
+        .list-item strong {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .list-item p {
+            margin: 0;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* 止损/风险警告：着重标记 */
+        .critical-box {
+            background-color: #fff0f0;
+            border: 1px solid #ffcccc;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .critical-box h3 {
+            margin: 0 0 10px 0;
+            color: #d32f2f;
+            font-size: 16px;
+        }
+
+        /* 页脚：签名位 */
+        footer {
+            margin-top: 80px;
+            padding-top: 20px;
+            border-top: 1px solid var(--rule-line);
+            font-size: 13px;
+            color: var(--text-secondary);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .stamp {
+            border: 2px solid #d32f2f;
+            color: #d32f2f;
+            padding: 5px 15px;
+            font-weight: bold;
+            transform: rotate(-15deg);
+            opacity: 0.8;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 40px 25px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+                            
+        <h1>核心开单逻辑指令集</h1>
+        <div class="doc-no">SYSTEM CODE: ALPHA-QUANT-001</div>
+    </header>
+
+    <div class="module">
+                     <h1>&nbsp;&nbsp;&nbsp;&nbsp;如果没有控制贪婪的能力和纪律,技术分析毫无意义</h1>
+            <h2>01. 市场环境扫描 (Filter)</h2>
+            <div class="list-item">
+            <strong>开单条件</strong>
+            <p> <br>1现在大趋势是什么（大结构）<br>
+<br>2 趋势方的最佳加仓点在哪里（支撑压力判断流动性）<br>
+<br>3重点 影线代表市场消息和情绪波动 不要在针尖入场<br>
+收盘价是多空博弈后的共识后 等实体开盘进场 </p>
+        </div>
+        <div class="list-item">
+            <strong>趋势共振</strong>
+            <p>只在日线 (D1) 与 4小时 (H4) 趋势一致时操作。D1 看涨则只寻低多，D1 看跌则只寻高空。</p>
+        </div>
+        <div class="list-item">
+            <strong>波动率检查</strong>
+            <p>避开非农、美联储议息会议前后 2 小时，避开成交量极低的横盘震荡期。</p>
+        </div>
+    </div>
+
+    <div class="module">
+        <h2>02. 入场条件 (Trigger)</h2>
+        <div class="list-item">
+            <strong>关键位回踩</strong>
+            <p>价格回到 OB (Order Block) 区间、斐波那契 0.618 或 前高/前低水平位。</p>
+        </div>
+        <div class="list-item">
+            <strong>形态确认</strong>
+            <p>15分钟级别出现：双底/双顶、孕线突破或 2B 衰竭信号。</p>
+        </div>
+        <div class="list-item">
+            <strong>指标背离</strong>
+            <p>RSI 在超买/超卖区出现底背离或顶背离，作为入场的二次确认。</p>
+        </div>
+    </div>
+
+    <div class="module">
+        <h2>03. 止损逻辑 (Invalidation)</h2>
+        <div class="list-item">
+            <strong>结构性失效</strong>
+            <p>做多：跌破前序波段最低点（实体收盘）。做空：突破前序波段最高点。</p>
+        </div>
+        <div class="list-item">
+            <strong>时间止损</strong>
+            <p>入场后 4 个持仓周期（如H1入场即4小时）行情仍未脱离成本区，无条件减仓或离场。</p>
+        </div>
+    </div>
+
+    <div class="module">
+        <h2>04. 风险控制 (Risk)</h2>
+        <div class="critical-box">
+            <h3>核心铁律：</h3>
+            <p style="margin: 0; font-size: 14px; color: #555;">
+                • 单笔交易的风险 (R) 不得超过总仓位的 2%。<br>
+                • 初始盈亏比低于 1:2 的单子严禁入场。<br>
+                • 价格到达 TP1 (1R) 后，必须将止损移动至入场位（保本）。
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        <div>执行标准：V2.0 PRO</div>
+        <div class="stamp">严格执行</div>
+    </footer>
+</div>
+
+</body>
+</html>

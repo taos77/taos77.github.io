@@ -38,7 +38,6 @@
         h1 { color: var(--accent-blue); font-size: 2rem; }
         h2 { color: var(--accent-green); border-left: 4px solid var(--accent-green); padding-left: 15px; margin-top: 30px; }
 
-        /* 卡片样式 */
         .card {
             background-color: var(--bg-card);
             border: 1px solid var(--border);
@@ -47,7 +46,6 @@
             margin-bottom: 20px;
         }
 
-        /* 准则大纲样式 */
         .rule-list {
             list-style: none;
             padding: 0;
@@ -67,7 +65,6 @@
             font-weight: bold;
         }
 
-        /* 跳转按钮 */
         .btn-link {
             display: inline-block;
             margin-top: 20px;
@@ -103,30 +100,34 @@
     </header>
 
     <section class="card">
-        <h2>📜 核心交易准则 (Rules of Engagement)</h2>
+        <h2>📜 核心交易准则</h2>
         <ul class="rule-list">
-            <li><strong>风险控制优先：</strong> 单笔交易风险不得超过总资金的 <code>2%</code>。没有止损单，绝不进场。</li>
-            <li><strong>趋势为友：</strong> 严禁在强趋势中逆势摸顶或抄底，除非出现明确的结构反转信号。</li>
-            <li><strong>开单条件：</strong> 日线 四小时线 大周期里找小周期开单条件</li>
-            <li><strong>仓位管理：</strong> 杠杆是放大器也是灭火器。高波动品种使用低杠杆（< 5x），主流品种严控在 20x 以内。</li>
-            <li><strong>等待确定性：</strong> 每天只做最有把握的 1-2 次交易。如果没有符合交易计划的信号，就空仓休息。</li>
-            <li><strong>盈利保护：</strong> 利润达到 1:1 盈亏比后，将止损移至开仓价（保本损）。可以移动止盈止损一半 剩下的部分推高止损</li>
+            <li><strong>风险控制：</strong> 单笔风险 &lt; 2%。没有止损不进场。</li>
+            <li><strong>趋势为友：</strong> 严禁在大周期强趋势中摸顶抄底。</li>
+            <li><strong>盈利保护：</strong> 1:1 后移至保本损，可移动止盈一半。</li>
         </ul>
     </section>
 
     <section class="card">
-        <h2>🧠 经验教训与复盘</h2>
-        <p>每一笔爆仓或大额亏损都是极其昂贵的学费。回顾这些错误是为了确保不再犯第二次。</p>
-        <p>目前已整理的复盘内容：</p>
-        <a href="baocang/index.html" class="btn-link">查看：爆仓案例深研 →</a>
+        <h2>🛠 交易执行指令</h2>
+        <p>基于核心准则的逻辑白皮书，包含入场、止损与风险量化标准。</p>
+        <a href="kaidan/index.html" class="btn-link">查看：核心开单逻辑 →</a>
     </section>
 
+    <section class="card">
+        <h2>🧠 经验教训与复盘</h2>
+        <p>每一笔大额亏损都是昂贵的学费。如果点击报错，请确认文件夹名是否为 baocang。</p>
+        <a href="baocang/index.html" class="btn-link">查看：爆仓案例深研 →</a>
+    </section>
+    <p>工具:合约计算器   <a href="jisuan/index.html" class="btn-link">加仓成本计算 →</a>
+</p> 
+      
     <footer>
         <p style="text-align: center; color: #8b949e; font-size: 0.8rem; margin-top: 50px;">
-            © 2026 Crypto Strategy Lab. Built with taos.
+            © 2026 Crypto Strategy Lab.
         </p>
     </footer>
 </div>
-
+ 
 </body>
 </html>
