@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>交易复盘笔记</title>
     <style>
-        /* 基本样式重置 */
         :root {
             --bg-color: #0d1117;
             --text-color: #c9d1d9;
@@ -20,7 +19,7 @@
             color: var(--text-color);
             line-height: 1.6;
             margin: 0;
-            padding: 20px;
+            padding: 15px; /* 缩小边距适配手机 */
         }
 
         .container {
@@ -32,49 +31,54 @@
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 10px;
             color: var(--accent-color);
+            font-size: 1.5rem; /* 调整标题大小 */
         }
 
-        /* 表格样式优化 */
+        /* --- 自适应核心修改：增加滚动容器 --- */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto; /* 关键：屏幕不够宽时允许横向滚动 */
+            -webkit-overflow-scrolling: touch;
+            margin: 20px 0;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+        }
+
         .trade-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
             background-color: #161b22;
-            border-radius: 6px;
-            overflow: hidden;
+            min-width: 600px; /* 保证表格在手机上不会缩成一坨 */
         }
 
         .trade-table th, .trade-table td {
             border: 1px solid var(--border-color);
-            padding: 12px;
+            padding: 10px;
             text-align: left;
+            font-size: 14px;
         }
 
         .trade-table th {
             background-color: #21262d;
             color: var(--accent-color);
+            white-space: nowrap; /* 标题不换行 */
         }
 
-        .trade-table tr:hover {
-            background-color: #1c2128;
-        }
-
-        /* 状态标签 */
         .badge {
             padding: 2px 8px;
             border-radius: 12px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: bold;
+            white-space: nowrap;
         }
         .badge-short { background: #20e616; color: white; }
         .badge-long { background: #de1405; color: white; }
 
-        /* 图片容器 */
         .screenshot-box {
             margin-top: 20px;
             border: 1px solid var(--border-color);
             border-radius: 6px;
-            padding: 10px;
+            padding: 15px;
             background: #161b22;
         }
 
@@ -88,7 +92,13 @@
 
         .timestamp {
             color: #8b949e;
-            font-size: 0.9em;
+            font-size: 0.85em;
+        }
+
+        /* 针对超小屏幕的微调 */
+        @media (max-width: 480px) {
+            h1 { font-size: 1.2rem; }
+            .screenshot-box { padding: 10px; }
         }
     </style>
 </head>
@@ -98,59 +108,61 @@
     <h1>📉 爆仓复盘总结</h1>
     <p class="timestamp">更新时间：2026-05-12</p>
 
-    <table class="trade-table">
-        <thead>
-            <tr>
-                <th>币种</th>
-                <th>方向/杠杆</th>
-                <th>强平原因</th>
-                <th>核心总结</th>
-                <th>反思评级</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><strong>DOGE/USDT</strong></td>
-                <td><span class="badge badge-short">多 20X</span></td>
-                <td>初入市场，狗狗币0.2无脑做多跌了还加仓多，最后跌到0.08 不懂技术分析不止损 最后爆仓</td>
-                <td>无脑送钱</td>
-                <td>⭐⭐⭐⭐⭐</td>
-            </tr>
-            <tr>
-                <td><strong>BTC/USDT</strong></td>
-                <td><span class="badge badge-long">空 50X</span></td>
-                <td>9w1开始听信kol是高点 最后11W才止损</td>
-                <td>虽然最终下跌但没有及时止损掉转方向 踏空牛市</td>
-                <td>⭐⭐⭐⭐⭐</td>
-            </tr>
-            <tr>
-                <td><strong>RAVE/USDT</strong></td>
-                <td><span class="badge badge-long">空 50X</span></td>
-                <td>0.3开始空 自以为山寨币顶多五六亿市值 最后涨到28 市值60多亿</td>
-                <td>自以为山寨小市值拉不动 资金费都能给你亏完</td>
-                <td>⭐⭐⭐⭐⭐</td>
-            </tr>
-            <tr>
-                <td><strong>ZEC/USDT</strong></td>
-                <td><span class="badge badge-long">空 50X</span></td>
-                <td>自以为大的山寨币拉不动五六十亿市值370跟着KOL空 最后涨到640 市值一百多亿 挤进市值榜11</td>
-                <td>止损接近亏完 又是不舍得止损</td>
-                <td>⭐⭐⭐⭐⭐</td>
-            </tr>
-            <tr>
-                <td><strong>NULL/USDT</strong></td>
-                <td><span class="badge badge-long">空 50X</span></td>
-                <td>                    别再</td>
-                <td>                    爆仓</td>
-                <td>⭐⭐⭐⭐⭐</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table class="trade-table">
+            <thead>
+                <tr>
+                    <th>币种</th>
+                    <th>方向/杠杆</th>
+                    <th>强平原因</th>
+                    <th>核心总结</th>
+                    <th>反思评级</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>DOGE/USDT</strong></td>
+                    <td><span class="badge badge-short">多 20X</span></td>
+                    <td>0.2无脑做多跌了还加仓，最后跌到0.08。不懂技术分析。</td>
+                    <td>无脑送钱</td>
+                    <td>⭐⭐⭐⭐⭐</td>
+                </tr>
+                <tr>
+                    <td><strong>BTC/USDT</strong></td>
+                    <td><span class="badge badge-long">空 50X</span></td>
+                    <td>9w1听信KOL是高点，最后11W才止损。</td>
+                    <td>踏空牛市，未及时调转方向</td>
+                    <td>⭐⭐⭐⭐⭐</td>
+                </tr>
+                <tr>
+                    <td><strong>RAVE/USDT</strong></td>
+                    <td><span class="badge badge-long">空 50X</span></td>
+                    <td>0.3开始空，涨到28。市值从5亿涨到60亿。</td>
+                    <td>自以为小市值拉不动</td>
+                    <td>⭐⭐⭐⭐⭐</td>
+                </tr>
+                <tr>
+                    <td><strong>ZEC/USDT</strong></td>
+                    <td><span class="badge badge-long">空 50X</span></td>
+                    <td>370跟着KOL空，涨到640。市值进前11。</td>
+                    <td>不舍得止损，接近亏完</td>
+                    <td>⭐⭐⭐⭐⭐</td>
+                </tr>
+                <tr>
+                    <td><strong>NULL/USDT</strong></td>
+                    <td><span class="badge badge-long">空 50X</span></td>
+                    <td>别再</td>
+                    <td>爆仓</td>
+                    <td>⭐⭐⭐⭐⭐</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
     <div class="screenshot-box">
         <h3>🖼️ 关键截图留存</h3>
-        <p>牢记</p>
-        <img src="2026-05-12-14-57-16.png" alt="2026-05-12-14-57-16.png" />
+        <p>血的教训，牢记于心。</p>
+        <img src="2026-05-12-14-57-16.png" alt="复盘截图" />
     </div>
 </div>
 
