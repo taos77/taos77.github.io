@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>ZEC合约实战风控计算器-V9版</title>
+    <style>
+        :root { --primary: #007bff; --success: #28a745; --danger: #dc3545; --accent: #f7931a; --dark: #1a1a1a; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; max-width: 1200px; margin: 20px auto; padding: 20px; background: #f4f7f6; color: #333; }
+        .card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-bottom: 20px; }
+        
+        /* 风险进度条 */
+        .risk-bar-container { width: 100%; height: 10px; background: #eee; border-radius: 5px; margin: 10px 0; overflow: hidden; }
+        #riskBar { width: 0%; height: 100%; background: var(--success); transition: 0.3s; }
+
+        .header-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px; }
+        .stat-card { background: #eef2f7; padding: 15px; border-radius: 10px; border-left: 5px solid var(--primary); }
+        .stat-label { font-size: 0.85em; color: #666; font-weight: bold; }
+        .stat-value { font-size: 1.2em; font-family: monospace; font-weight: bold; margin-top: 5px; }
+
+        .balance-hero { background: var(--dark); color: white; padding: 20px; border-radius: 12px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+        .balance-input { background: #333; border: 1px solid var(--accent); color: var(--accent); font-size: 1.5em; padding: 8px; border-radius: 6px; width: 180px; }
+
+        table { width: 100%; border-collapse: collapse; }
+        th { background: #f8f9fa; padding: 12px; text-align: center; font-size: 0.85em; }
+        td { padding: 10px; border-bottom: 1px solid #eee; text-align: center; }
+        .row-input { width: 90%; text-align: center; border: 1px solid #ddd; padding: 8px; border-radius: 4px; font-family: monospace; }
+        
+        .dir-btn { padding: 10px 20px; border: none; cursor: pointer; font-weight: bold; border-radius: 6px; background: #ddd; }
+        .dir-btn.active.long { background: var(--success); color: white; }
+        .dir-btn.active.short { background: var(--danger); color: white; }
+
+        .footer-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+        .warning { color: var(--danger); font-size: 0.8em; margin-top: 5px; display: none; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="balance-hero">
+        <div>
+            <div style="color:#aaa; font-size:0.9em; margin-bottom:5px;">账户总可用余额 (Equity)</div>
+            <input type="number" id="totalBalance" class="balance-input" value="488" oninput="calculate()">
+        </div>
+        <div style="flex:1; margin: 0 40px;">
+            <div style="display:flex; justify-content:space-between; font-size:0.9em;">
+                <span>保证金占用比 (风险度)</span>
+                <span id="riskPercent">0%</span>
+            </div>
+            <div class="risk-bar-container"><div id="riskBar"></div></div>
+            <div id="riskWarning" class="warning">⚠️ 警告：保证金占用过高，极易触发强制平仓！</div>
+        </div>
+        <div style="text-align:right">
+            <div style="color:#aaa; font-size:0.9em;">预计盈亏比 (R:R)</div>
+            <div id="rrRatio" style="font-size:1.5em; color:var(--accent); font-weight:bold;">0.00</div>
+        </div>
+    </div>
+
+    <div class="header-grid">
+        <div class="stat-card" style="border-color:var(--accent)">
+            <div class="stat-label">盈亏平衡点 (BE Price)</div>
+            <div id="bePrice" class="stat-value">--</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">全局持仓均价</div>
+            <div id="totalAvgPrice" class="stat-value">--</div>
+        </div>
+        <div class="stat-card" style="border-color:var(--danger)">
+            <div class="stat-label">强平价格 (Liq)</div>
+            <div id="globalLiq" class="stat-value" style="color:var(--danger)">--</div>
+        </div>
+        <div class="stat-card" style="border-color:var(--success)">
+            <div class="stat-label">目标预期利润</div>
+            <div id="totalPnlDisplay" class="stat-value">--</div>
+        </div>
+    </div>
+
+    <div style="display:flex; gap:20px; margin-bottom:20px; align-items:flex-end; flex-wrap: wrap;">
+        <div style="display:flex; flex-direction:column; gap:5px;">
+            <label style="font-size:0.8em; font-weight:bold;">币种</label>
+            <input type="text" id="targetSymbol" style="width:70px; padding:8px;" value="ZEC" onchange="calculate()">
+        </div>
+        <div style="display:flex; flex-direction:column; gap:5px;">
+            <label style="font-size:0.8em; font-weight:bold;">方向</label>
+            <div style="display:flex; gap:5px;">
+                <button id="longBtn" class="dir-btn" onclick="setDirection('long')">做多</button>
+                <button id="shortBtn" class="dir-btn active short" onclick="setDirection('short')">做空</button>
+            </div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:5px;">
+            <label style="font-size:0.8em; font-weight:bold;">杠杆 (x)</label>
+            <input type="number" id="leverage" value="5" style="width:60px; padding:8px;" oninput="calculate()">
+        </div>
+        <div style="display:flex; flex-direction:column; gap:5px;">
+            <label style="font-size:0.8em; font-weight:bold;">止盈/止损目标价</label>
+            <input type="number" id="closePrice" style="width:120px; padding:8px; border:1px solid var(--success);" oninput="calculate()">
+        </div>
+        <button onclick="fetchCurrentPrice()" style="padding:8px 15px; cursor:pointer; height:37px;">获取现价</button>
+        <span id="currentPriceDisplay" style="align-self:center; font-family:monospace; font-weight:bold; height:37px; line-height:37px;">--</span>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>笔数</th><th>计划价格</th><th>加仓数量(枚)</th><th>名义保证金(U)</th><th>占比</th><th>操作</th>
+            </tr>
+        </thead>
+        <tbody id="mainTable">
+            <tr>
+                <td>1</td>
+                <td><input type="number" class="price row-input" oninput="calculate()"></td>
+                <td><input type="number" class="qty row-input" oninput="calculate('qty', this)"></td>
+                <td><input type="number" class="margin row-input" oninput="calculate('margin', this)"></td>
+                <td class="row-percent" style="font-size:0.8em; color:#999;">-</td>
+                <td>-</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button onclick="addRow()" style="margin-top:15px; background:var(--success); color:white; border:none; padding:10px 20px; border-radius:6px; cursor:pointer;">+ 添加阶梯挂单模拟</button>
+
+    <div class="footer-panel">
+        <div class="card" style="margin-bottom:0; border:1px dashed #ccc; box-shadow:none;">
+            <div class="stat-label">强平价反推工具</div>
+            <div style="margin-top:10px; display:flex; gap:10px; align-items:center;">
+                <input type="number" id="targetLiqPrice" style="padding:8px; border:2px solid var(--danger); border-radius:5px; width:100px;" placeholder="例如 904">
+                <button onclick="reverseCalculate()" style="padding:8px 15px; cursor:pointer; background:var(--dark); color:white; border:none; border-radius:5px;">反推所需余额</button>
+            </div>
+            <div id="reverseResult" style="font-size:0.8em; margin-top:8px; color:var(--danger); font-weight:bold;"></div>
+        </div>
+        <div class="card" style="margin-bottom:0; background:#f9f9f9; box-shadow:none; border:1px solid #eee;">
+            <div class="stat-label">实战提醒</div>
+            <div style="font-size:0.85em; color:#666; margin-top:5px; line-height:1.5;">
+                1. <b>BE Price</b> 是考虑了双边手续费后的保本离场价。<br>
+                2. 风险度 > 80% 时，任何微小波动都可能导致爆仓。
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let currentDirection = 'short';
+
+    // 获取实时价格
+    async function fetchCurrentPrice() {
+        const symbol = document.getElementById('targetSymbol').value.toUpperCase();
+        try {
+            const response = await fetch(`https://api1.binance.com/api/v3/ticker/price?symbol=${symbol}USDT`);
+            const data = await response.json();
+            const price = parseFloat(data.price);
+            document.getElementById('currentPriceDisplay').innerText = price.toFixed(2);
+            // 自动填充到第一行
+            const firstPriceInput = document.querySelector('.price');
+            if(firstPriceInput && !firstPriceInput.value) {
+                firstPriceInput.value = price;
+                calculate();
+            }
+        } catch (e) {
+            console.error("无法获取价格");
+        }
+    }
+
+    function setDirection(dir) {
+        currentDirection = dir;
+        document.getElementById('longBtn').classList.toggle('active', dir === 'long');
+        document.getElementById('longBtn').classList.toggle('long', dir === 'long');
+        document.getElementById('shortBtn').classList.toggle('active', dir === 'short');
+        document.getElementById('shortBtn').classList.toggle('short', dir === 'short');
+        calculate();
+    }
+
+    function addRow() {
+        const tbody = document.getElementById('mainTable');
+        const rowCount = tbody.rows.length + 1;
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${rowCount}</td>
+            <td><input type="number" class="price row-input" oninput="calculate()"></td>
+            <td><input type="number" class="qty row-input" oninput="calculate('qty', this)"></td>
+            <td><input type="number" class="margin row-input" oninput="calculate('margin', this)"></td>
+            <td class="row-percent" style="font-size:0.8em; color:#999;">-</td>
+            <td><button onclick="this.closest('tr').remove();calculate()" style="color:red; background:none; border:none; cursor:pointer;">✕</button></td>
+        `;
+        tbody.appendChild(tr);
+    }
+
+    function calculate(type, source) {
+        const balance = parseFloat(document.getElementById('totalBalance').value) || 0;
+        const leverage = parseFloat(document.getElementById('leverage').value) || 1;
+        const rows = document.querySelectorAll('#mainTable tr');
+        
+        let totalQty = 0;
+        let totalNotionalValue = 0; // 总名义价值
+        let totalMarginUsed = 0;
+
+        rows.forEach(row => {
+            const pInput = row.querySelector('.price');
+            const qInput = row.querySelector('.qty');
+            const mInput = row.querySelector('.margin');
+            
+            let p = parseFloat(pInput.value) || 0;
+            let q = parseFloat(qInput.value) || 0;
+            let m = parseFloat(mInput.value) || 0;
+
+            if (p > 0) {
+                if (type === 'margin' && source === mInput) {
+                    q = (m * leverage) / p;
+                    qInput.value = q.toFixed(4);
+                } else if (type === 'qty' && source === qInput) {
+                    m = (q * p) / leverage;
+                    mInput.value = m.toFixed(2);
+                } else if (p > 0 && q > 0) {
+                    // 默认更新保证金显示
+                    m = (q * p) / leverage;
+                    mInput.value = m.toFixed(2);
+                }
+
+                totalQty += q;
+                totalNotionalValue += (p * q);
+                totalMarginUsed += (q * p) / leverage;
+            }
+        });
+
+        if (totalQty > 0) {
+            const avgPrice = totalNotionalValue / totalQty;
+            document.getElementById('totalAvgPrice').innerText = avgPrice.toFixed(4);
+            
+            // 1. 盈亏平衡点 (含万5双边手续费)
+            const bePrice = currentDirection === 'long' ? avgPrice * 1.001 : avgPrice * 0.999;
+            document.getElementById('bePrice').innerText = bePrice.toFixed(4);
+
+            // 2. 强平价格 (全仓简化模型: 维持保证金率 0.5%)
+            const mmr = 0.005;
+            let liqPrice = 0;
+            if (currentDirection === 'long') {
+                liqPrice = avgPrice - (balance / totalQty) + (avgPrice * mmr);
+            } else {
+                liqPrice = avgPrice + (balance / totalQty) - (avgPrice * mmr);
+            }
+            document.getElementById('globalLiq').innerText = liqPrice > 0 ? liqPrice.toFixed(2) : "不爆仓";
+
+            // 3. 风险度 (占用保证金 / 总余额)
+            const riskRatio = Math.min((totalMarginUsed / balance) * 100, 100);
+            document.getElementById('riskPercent').innerText = riskRatio.toFixed(1) + "%";
+            const riskBar = document.getElementById('riskBar');
+            riskBar.style.width = riskRatio + "%";
+            riskBar.style.background = riskRatio > 80 ? '#dc3545' : (riskRatio > 50 ? '#f7931a' : '#28a745');
+            document.getElementById('riskWarning').style.display = riskRatio > 90 ? 'block' : 'none';
+
+            // 4. 预期利润与盈亏比
+            const targetPrice = parseFloat(document.getElementById('closePrice').value) || 0;
+            if (targetPrice > 0) {
+                const pnl = currentDirection === 'long' ? (targetPrice - avgPrice) * totalQty : (avgPrice - targetPrice) * totalQty;
+                document.getElementById('totalPnlDisplay').innerText = pnl.toFixed(2) + " USDT";
+                document.getElementById('totalPnlDisplay').style.color = pnl >= 0 ? '#28a745' : '#dc3545';
+                
+                const rr = Math.abs(pnl / totalMarginUsed);
+                document.getElementById('rrRatio').innerText = rr.toFixed(2);
+            }
+
+            // 更新每一行的占比
+            rows.forEach(row => {
+                const q = parseFloat(row.querySelector('.qty').value) || 0;
+                row.querySelector('.row-percent').innerText = ((q / totalQty) * 100).toFixed(1) + "%";
+            });
+        }
+    }
+
+    function reverseCalculate() {
+        const targetLiq = parseFloat(document.getElementById('targetLiqPrice').value);
+        const avgPrice = parseFloat(document.getElementById('totalAvgPrice').innerText);
+        const totalQty = parseFloat(document.getElementById('totalQty')?.innerText || 0) || 0; 
+        
+        // 重新获取当前页面总数
+        let currentTotalQty = 0;
+        document.querySelectorAll('.qty').forEach(i => currentTotalQty += (parseFloat(i.value) || 0));
+
+        if (targetLiq && avgPrice && currentTotalQty) {
+            // 余额 = |均价 - 目标强平价| * 数量
+            const neededBalance = Math.abs(avgPrice - targetLiq) * currentTotalQty;
+            document.getElementById('reverseResult').innerText = `需账户总余额达到: ${neededBalance.toFixed(2)} USDT`;
+        } else {
+            alert("请先填写开仓价格和数量");
+        }
+    }
+</script>
+</body>
+</html>
